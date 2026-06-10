@@ -11,10 +11,10 @@ Static HTML website for **Morso**, a neighbourhood café in Balewadi, Pune. Depl
 ### Menu Updates (primary workflow)
 ```bash
 # Apply menu changes from Excel sheet
-python3 morso_menu_updater.py Morso_Menu_Master.xlsx index.html
+python3 scripts/morso_menu_updater.py Morso_Menu_Master.xlsx index.html
 
 # Preview changes without modifying files
-python3 morso_menu_updater.py Morso_Menu_Master.xlsx index.html --dry-run
+python3 scripts/morso_menu_updater.py Morso_Menu_Master.xlsx index.html --dry-run
 ```
 **Requires**: `openpyxl`, `beautifulsoup4` Python packages.
 
@@ -49,7 +49,7 @@ Each `.menu-item` has: name, description, price (₹), dietary indicator (green/
 - Dark mode toggle writes to `localStorage`
 - Reviews carousel auto-rotates every 4s
 
-### Python menu updater (`morso_menu_updater.py`)
+### Python menu updater (`scripts/morso_menu_updater.py`)
 Reads `Morso_Menu_Master.xlsx` and processes rows where `Action` column is `ADD`, `UPDATE`, or `REMOVE`. Directly manipulates `index.html` using regex and string operations (minimal BeautifulSoup usage). The updater handles section ordering via a `priority` field and can update nav link text when section titles change.
 
 ### Deployment pipeline
@@ -60,5 +60,5 @@ Excel file → morso_menu_updater.py → index.html → git push → GitHub → 
 ## Content notes
 
 - **16 menu sections** (Morsels, Morso Bowls, Burger Club, Grilled Panini, All That Pizzazz, Pasta Classics, Toast Tribe, Eggs all right, Protein & Greens, Smashin' Croissants, You Dessert This, Coolers and Shakers, Matcha Room, The Hot Bar, Chilled Coffee Bar, Bottles)
-- Brand fonts: `TwCenMTStd.otf` (regular) and `TwCenMTStdSemiBold.otf` — loaded via `@font-face`, files must remain in repo root
-- `indexv1.html` and `Trash/` directory are legacy backups — do not modify
+- Brand fonts: `assets/fonts/TwCenMTStd.woff2` (regular) and `assets/fonts/TwCenMTStdSemiBold.woff2` (bold) — primary format; `.otf` fallbacks also in `assets/fonts/`
+- `archive/indexv1.html` is a legacy backup — do not modify
